@@ -4,6 +4,7 @@ const express = require("express");
 const mysql = require("mysql");
 // 加载 bodyParser 模块
 const bodyParser = require("body-parser");
+const { query } = require("express");
 
 // 创建MySQL连接池
 const pool = mysql.createPool({
@@ -23,11 +24,27 @@ app.use(
     extended: false,
   })
 );
-app.use(express.static("/public"));
+app.use(express.static("./public"));
 
 //查询所有类别
 app.get("/laptop_family", (req, res) => {
   let sql = "select*from mz_laptop_family";
+  pool.query(sql, (errer, result) => {
+    if (errer) throw errer;
+    res.send({ res: result });
+  });
+});
+// 轮播图
+app.get("/index_swipe", (req, res) => {
+  let sql = "select*from mz_index_swipe";
+  pool.query(sql, (errer, result) => {
+    if (errer) throw errer;
+    res.send({ res: result });
+  });
+});
+// 查询手机类
+app.get("/phone", (req, res) => {
+  let sql = "select*from mz_phone";
   pool.query(sql, (errer, result) => {
     if (errer) throw errer;
     res.send({ res: result });
