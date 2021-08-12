@@ -1,9 +1,10 @@
 <template>
   <div>
+    <navbar></navbar>
     <!-- 顶部导航栏 -->
-    <van-nav-bar class="navbar">
+    <!-- <van-nav-bar class="navbar">
       <template #left>
-        <van-icon name="search" color="#aaa" size="25" />
+        <van-icon name="search" color="#aaa" size="25" @click="onClickLeft()" />
       </template>
       <template #title>
         <img
@@ -29,9 +30,9 @@
           height="15.05rpx"
           alt=""
         />
-        <!-- <van-image width="30px" height="30px" src="../assets/index/购物车.svg" /> -->
+       
       </template>
-    </van-nav-bar>
+    </van-nav-bar> -->
     <!-- 导航标签页 -->
     <van-tabs
       color="#008cff"
@@ -116,7 +117,7 @@
           width="100%"
           :src="require('../assets/index/phone.jpg')"
         />
-        <van-grid :column-num="2" class="phone-cell-img">
+        <van-grid :column-num="2" clickable :gutter="5" class="phone-cell-img">
           <van-grid-item
             v-for="(item, index) in phone.slice(0, 6)"
             :key="index"
@@ -127,25 +128,77 @@
             <p>￥{{ item.price }}</p>
           </van-grid-item>
         </van-grid>
+        <!-- 手机配件 -->
+        <div v-if="accessories">
+          <van-tabs class="h3-cell" color="#7143FF">
+            <van-tab>
+              <template #title> <h3 style="color: #000">智能配件</h3></template>
+            </van-tab>
+          </van-tabs>
+          <div class="accessories-cell">
+            <div>
+              <img :src="urls + accessories[9].title_img" alt="" />
+            </div>
+            <div>
+              <h4>{{ accessories[9].name }}</h4>
+              <span>{{ accessories[9].title }}</span>
+              <p>￥{{ accessories[9].price }}</p>
+            </div>
+          </div>
+          <div class="accessories-cell-r">
+            <div>
+              <h4>{{ accessories[10].name }}</h4>
+              <span>{{ accessories[10].title }}</span>
+              <p>￥{{ accessories[10].price }}</p>
+            </div>
+            <div>
+              <img :src="urls + accessories[10].title_img" alt="" />
+            </div>
+          </div>
+          <van-grid
+            :column-num="2"
+            clickable
+            :gutter="5"
+            class="phone-cell-img"
+          >
+            <van-grid-item
+              v-for="(item, index) in accessories.slice(0, 6)"
+              :key="index"
+            >
+              <img :src="urls + item.title_img" alt="" />
+              <h4>{{ item.name }}</h4>
+              <div>{{ item.price_title }}{{ item.title }}</div>
+              <p>￥{{ item.price }}</p>
+            </van-grid-item>
+          </van-grid>
+        </div>
 
         <!--  -->
       </van-tab>
 
       <van-tab v-for="(item, index) in laptop" :key="index" :title="item.fname"
-        >123132</van-tab
+        >
+        
+        </van-tab
       >
     </van-tabs>
   </div>
 </template>
 <script>
+import navbar from '../components/Navbar.vue';
 export default {
+  components:{navbar},
   data() {
     return {
-      laptop: "",
-      index_swipe: "",
-      phone: "",
+      laptop: "", // 商品分类
+      index_swipe: "", //首页轮播图
+      phone: "", // 所有手机
+      accessories: "", // 所有手机配件
       urls: "http://127.0.0.1:3000/",
     };
+  },
+  methods:{
+    
   },
   mounted() {
     // 请求导航标签栏接口
@@ -156,29 +209,148 @@ export default {
     });
     // 请求首页轮播图接口
     this.axios.get("/index_swipe").then((result) => {
-      console.log(result);
+      // console.log(result);
       this.index_swipe = result.data.res;
       // console.log(this.index_swipe);
     });
     //  请求所有手机商品
     this.axios.get("/phone").then((result) => {
-      console.log(result);
+      // console.log(result);
       this.phone = result.data.res;
-      console.log(this.phone);
+      // console.log(this.phone);
+    });
+    // 请求所有手机配件信息
+    this.axios.get("/accessories").then((result) => {
+      // console.log(result);
+      this.accessories = result.data.res;
+      console.log(this.accessories);
     });
   },
 };
 </script>
 
 <style scoped lang="scss" >
+.accessories-cell-r {
+  display: flex;
+  // height: 50vh;
+
+  div:last-child {
+    width: 50%;
+    img {
+      width: 100%;
+    }
+  }
+  div:first-child {
+    width: 50%;
+    // height: 50%;
+    background-color: rgb(85,195,195);
+    // padding: 3vw;
+    position: relative;
+    h4 {
+      padding: 3vw;
+      color: white;
+      width: 70%;
+      margin: 0;
+      margin-bottom: 2vh;
+      font-weight: 300;
+      font-size: 4.5vw;
+      overflow: hidden;
+      position: relative;
+      text-overflow: -o-ellipsis-lastline;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    span {
+      font-size: 3.33333vw;
+      color: hsla(0, 0%, 100%, 0.7);
+      position: relative;
+      line-height: 1.2;
+      padding: 0 3vw;
+      position: absolute;
+    }
+    p {
+      position: absolute;
+      line-height: 1.2;
+      padding: 1.2vw 0;
+      margin: 0;
+      left: 3.88889vw;
+      bottom: 6vw;
+      color: hsla(0, 0%, 100%, 0.7);
+      font-size: 4.62963vw;
+    }
+  }
+}
+.accessories-cell {
+  display: flex;
+  // height: 50vh;
+  div:first-child {
+    width: 50%;
+    img {
+      width: 100%;
+    }
+  }
+  div:last-child {
+    width: 50%;
+    // height: 50%;
+    background-color: rgb(255, 174, 69);
+    position: relative;
+    h4 {
+      padding: 3vw;
+      color: white;
+      width: 70%;
+      margin: 0;
+      margin-bottom: 2vh;
+      font-weight: 300;
+      font-size: 4.5vw;
+      overflow: hidden;
+      position: relative;
+      text-overflow: -o-ellipsis-lastline;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    span {
+      // padding: 3vw;
+      font-size: 3.33333vw;
+      color: hsla(0, 0%, 100%, 0.7);
+      position: relative;
+      line-height: 1.2;
+      padding: 0 3vw;
+      position: absolute;
+      display: block;
+    }
+    p {
+      // padding: 3vw;
+      position: absolute;
+      line-height: 1.2;
+      padding: 1.2vw 0;
+      margin: 0;
+      left: 3.88889vw;
+      bottom: 6vw;
+      color: hsla(0, 0%, 100%, 0.7);
+      font-size: 4.62963vw;
+    }
+  }
+}
 .phone-cell-img {
+  background-color: rgb(247, 247, 247);
+  padding: 10px;
   img {
     width: 100%;
   }
-  h4{
+  h4 {
+    width: 40vw;
+    overflow: hidden; //超出隐藏
+    text-overflow: ellipsis; //显示省略号
+    white-space: nowrap; //强制不换行
     color: #000;
     font-size: 4vw;
-    margin:5px 0;
+    margin: 1vh 0;
   }
   div {
     color: #999999;
@@ -190,15 +362,18 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  p{
+  p {
     color: red;
     font-size: 4vw;
-    margin:6px 0;
+    margin: 6px 0;
   }
 }
 .h3-cell {
   padding-top: 5vh;
   padding-bottom: 2vh;
+  h3 {
+    font-size: 5vw;
+  }
 }
 .index-banner {
   padding-top: 1.5vh;

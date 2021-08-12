@@ -1,16 +1,3 @@
-// module.exports = {
-//   devServer: {
-//     proxy: {
-//       "/api": {
-//         target: "http://127.0.0.1:3000",
-//         changeOrigin: true,
-//         pathRewrite: {
-//           "^/api": "",
-//         },
-//       },
-//     },
-//   },
-// };
 module.exports = {
   // //配置彻底懒加载
   // chainWebpack:config=>{
@@ -18,7 +5,11 @@ module.exports = {
   //   //删除index.html开头的带有prefetch属性的link，不要异步下载暂时不需要的页面组件文件
   // },
   //配置发送请求的代理服务器程序
+  // publicPath: "/",
   devServer: {
+    // historyApiFallback: {
+    //   index: "/index.html", //与output的publicPath
+    // },
     proxy: {
       "/": {
         target: `http://127.0.0.1:3000`,

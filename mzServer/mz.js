@@ -50,6 +50,14 @@ app.get("/phone", (req, res) => {
     res.send({ res: result });
   });
 });
+//查询手机配件商品
+app.get("/accessories",(req,res)=>{
+  let sql="select*from mz_accessories";
+  pool.query(sql,(errer,result)=>{
+    if(errer) throw errer;
+    res.send({res:result});
+  })
+})
 
 // 指定服务器对象监听的端口号
 app.listen(3000, () => {

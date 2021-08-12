@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS mz;
 CREATE DATABASE mz CHARSET=UTF8;
 USE mz;
 
-/**产品分类**/
+/**总产品分类**/
 CREATE TABLE mz_laptop_family(
     fid INT PRIMARY KEY AUTO_INCREMENT,  #编号
     fname VARCHAR(16) #名称
@@ -46,6 +46,32 @@ CREATE TABLE mz_phone(
     cpus VARCHAR(32), #CPU
     gpu VARCHAR(32)  #GPU
 );
+
+/* 手机配件商品 */
+CREATE TABLE mz_accessories(
+    cid int PRIMARY KEY AUTO_INCREMENT, #商品编号  自增
+    name VARCHAR(32),  #商品名称
+    price_title VARCHAR(32),  #价格标题
+    title VARCHAR(256),  #标题
+    price VARCHAR(8),  #价格
+    price_staging VARCHAR(8),  #分期价格
+    color VARCHAR(16),  #颜色
+    title_img VARCHAR(128)  #标题图片
+);
+
+/* 插入手机配件商品信息 */
+INSERT INTO mz_accessories VALUES(NULL,'魅族超充适配器 45W','【限量现货】','适配 18 系列 | 智能兼容 | 安全无忧 | 简约设计','99','8.86','白色','/accessories/Cgbj0GA7YaiAf0tzAAG41B1Zn38846.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER PC 磨砂壳','【PANDAER PC 磨砂壳&侠意保护壳&液态硅胶壳 | 满178减50 满267减80】【附赠官方定制保护膜】','PANDAER 18 周年定制 | 附赠手机膜 | 磨砂防指纹 | 轻薄无负担','89','7.96','18周年纪念（魅族 18 Pro）','/accessories/Cgbj0GCwvAeACcRcAAWjRXcpC0Y772.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER PC 磨砂壳','【PANDAER PC 磨砂壳&侠意保护壳&液态硅胶壳 | 满178减50 满267减80】【附赠官方定制保护膜】','PANDAER 18 周年定制 | 附赠手机膜 | 磨砂防指纹 | 轻薄无负担','89','7.96','18周年纪念（魅族 18）','/accessories/Cgbj0WCwvAeAZKuVAAZG-So9j_s876.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER 夏日特饮保护壳','【魅友家周年庆福利 | 限时特惠69元 | 附赠官方定制保护膜】','半透果冻设计 | 夏日限定款 | 清凉无负担','69','6.18','芒果绵绵冰 （魅族 18）','/accessories/Cgbj0WDB-wyAeArcAAGU-DDSxqQ726.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER 夏日特饮保护壳','【魅友家周年庆福利 | 限时特惠69元 | 附赠官方定制保护膜】','半透果冻设计 | 夏日限定款 | 清凉无负担','69','6.18','冻柠乐（魅族 18）','/accessories/Cgbj0WDB-wyAGN6JAAHMEK8-fbc208.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER 夏日特饮保护壳','【魅友家周年庆福利 | 限时特惠69元 | 附赠官方定制保护膜】','半透果冻设计 | 夏日限定款 | 清凉无负担','69','6.18','柠檬黑加仑（魅族 18）','/accessories/Cgbj0GDB-xGAWRKsAAHSjLLJuRQ716.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER 夏日特饮保护壳','【魅友家周年庆福利 | 限时特惠69元 | 附赠官方定制保护膜】','半透果冻设计 | 夏日限定款 | 清凉无负担','69','6.18','冻柠乐（魅族 18 Pro）','/accessories/Cgbj0GDB-xGAMsS_AAGqvMR6nrU340.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER 夏日特饮保护壳','【魅友家周年庆福利 | 限时特惠69元 | 附赠官方定制保护膜】','半透果冻设计 | 夏日限定款 | 清凉无负担','69','6.18','芒果绵绵冰 （魅族 18 Pro）','/accessories/Cgbj0GDB-wyAO5apAAGGwmnfYDw411.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族 18 系列 PANDAER 夏日特饮保护壳','【魅友家周年庆福利 | 限时特惠69元 | 附赠官方定制保护膜】','半透果冻设计 | 夏日限定款 | 清凉无负担','69','6.18','芒果绵绵冰 （魅族 18 Pro）','/accessories/Cgbj0WDB-xGAKdNpAAHN_2RPlDw696.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族立式无线超充','【限量现货】','40W 无线超充 比肩有线 | 双重线圈 横竖无忧 | 立式风道 快而冷静','199','17.82','白色','/accessories/Cgbj0WCLqvCAXlyJAAJC6t5iFFc507.jpg240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族超充 USB-C 移动电源',NULL,'USB-C 双向快充 | 22.5W 大功率 | 数字电量显示 | 多快充协议支持','169','15.13','白色','/accessories/Cgbj0F64-fCANzfvAAMAQSi_H7U780.png240x240.jpg');
+INSERT INTO mz_accessories VALUES(NULL,'魅族超充 GaN 三口充电器',NULL,'65W MAX功率输出 | GaN 芯片 | 安全小巧 | 三口输出','199',NULL,'白色','/accessories/Cgbj0F67s3yAYmI6AAIrMK1gFWU758.png240x240.jpg');
 
 /*插入手机信息*/
 INSERT INTO mz_phone VALUES(NULL,'魅族 18 Pro','【限时领券至高立省800 | 12期免息 | 赠手机壳】','骁龙 888 | Flyme 9 隐私安全系统 全面隐私防护 真正安全体验 ｜ 三星 GN1 5000万像素 | 记忆金属光学防抖｜ 2K+ 120帧 6.7英寸微弧柔性屏 | 超声波屏下指纹解锁 0.1s湿手解锁 | 防尘防水 安全保护 | 4500mAh大电池','4999','416.58','全网通公开版','飞雪流光','8+128GB','/phone_title/Cgbj0WA-HaGAfAzXAAaBocwqRik813.png240x240.jpg','高通骁龙888','6.7英寸','4400万','5000+3200+800+30万','AI人脸识别解锁','超声波指纹','4500mAh','魅族','162.5*73*8.1mn','189g','5000000:1','3200 x 1440','526','1300nit（局部峰值亮度）','On-Cell 全贴合','8GB/12GB','128GB<br>256GB','Qualcomm® 骁龙™ 888 + X60 8 核心移动平台','Adreno™ 660 图形处理器');
