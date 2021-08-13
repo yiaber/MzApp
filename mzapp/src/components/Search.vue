@@ -10,13 +10,13 @@
         show-action
         action
         action-text="搜索"
+        @change="onSearch()"
       >
         <template #left>
-          <van-icon name="arrow-left" color="#666" size="25" @click="black"/>
+          <van-icon name="arrow-left" color="#666" size="25" @click="black" />
         </template>
       </van-search>
     </div>
-    <div class="bg-green-600"></div>
   </div>
 </template>
 <script>
@@ -26,11 +26,16 @@ export default {
       value: "",
     };
   },
-  methods:{
-      black(){
-          this.$router.push('/')
-      },
-  }
+  methods: {
+    black() {
+      this.$router.go(-1);
+    },
+    onSearch() {
+      console.log(this.value);
+      this.$router.push(`/serp/${this.value}`);
+    },
+
+  },
 };
 </script>
 <style lang="scss" scoped>

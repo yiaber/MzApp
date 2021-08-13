@@ -51,14 +51,41 @@ app.get("/phone", (req, res) => {
   });
 });
 //查询手机配件商品
-app.get("/accessories",(req,res)=>{
-  let sql="select*from mz_accessories";
-  pool.query(sql,(errer,result)=>{
-    if(errer) throw errer;
-    res.send({res:result});
-  })
-})
+app.get("/accessories", (req, res) => {
+  let sql = "select*from mz_accessories";
+  pool.query(sql, (errer, result) => {
+    if (errer) throw errer;
+    res.send({ res: result });
+  });
+});
 
+// 搜索商品
+app.get("/search", (req, res) => {
+  let fname = `%${req.query.fname}%`;
+  let details = [];
+  pool.query(
+    "select * from mz_phone where name like ?",
+    [fname],
+    (errer, result) => {
+      if (errer) throw errer;
+      // details.push.apply(result);
+      details = [...result];
+      pool.query(
+        "select * from mz_accessories where name like ?",
+        [fname],
+        (err, results) => {
+          if (err) throw err;
+          details = [...details, ...results];
+          console.log(details);
+          // result.push(results)
+          // details.push(results);
+          // console.log(results);
+          res.send(details);
+        }
+      );
+    }
+  );
+});
 // 指定服务器对象监听的端口号
 app.listen(3000, () => {
   console.log("服务器正常运行中....");

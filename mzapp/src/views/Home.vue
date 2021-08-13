@@ -122,7 +122,7 @@
             v-for="(item, index) in phone.slice(0, 6)"
             :key="index"
           >
-            <img :src="urls + item.phone_title" alt="" />
+            <img :src="urls + item.title_img" alt="" />
             <h4>{{ item.name }} {{ item.color }}</h4>
             <div>{{ item.price_title }}{{ item.title }}</div>
             <p>￥{{ item.price }}</p>
@@ -172,22 +172,18 @@
             </van-grid-item>
           </van-grid>
         </div>
-
         <!--  -->
       </van-tab>
 
-      <van-tab v-for="(item, index) in laptop" :key="index" :title="item.fname"
-        >
-        
-        </van-tab
-      >
+      <van-tab v-for="(item, index) in laptop" :key="index" :title="item.fname">
+      </van-tab>
     </van-tabs>
   </div>
 </template>
 <script>
-import navbar from '../components/Navbar.vue';
+import navbar from "../components/Navbar.vue";
 export default {
-  components:{navbar},
+  components: { navbar },
   data() {
     return {
       laptop: "", // 商品分类
@@ -197,9 +193,7 @@ export default {
       urls: "http://127.0.0.1:3000/",
     };
   },
-  methods:{
-    
-  },
+  methods: {},
   mounted() {
     // 请求导航标签栏接口
     this.axios.get("/laptop_family").then((result) => {
@@ -243,7 +237,7 @@ export default {
   div:first-child {
     width: 50%;
     // height: 50%;
-    background-color: rgb(85,195,195);
+    background-color: rgb(85, 195, 195);
     // padding: 3vw;
     position: relative;
     h4 {
