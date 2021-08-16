@@ -17,41 +17,16 @@
         </van-grid-item>
       </van-grid>
     </div>
-    <!-- 商品下面四个小图标 -->
-    <div class="pic-cell">
-      <van-grid :column-num="4" :gutter="5" :border="false" :clickable="true" :square="true">
-        <van-grid-item>
-          <img
-            src="../assets/search/237d883a-d669-4231-b645-d0363ac3f1df.jpg"
-            alt=""
-          />
-        </van-grid-item>
-        <van-grid-item>
-          <img
-            src="../assets/search/44d9807b-1240-4637-aaef-43e1f6742f81.jpg"
-            alt=""
-          />
-        </van-grid-item>
-        <van-grid-item>
-          <img
-            src="../assets/search/518fc8a2-c14d-488c-9ada-b757bbd71c08.jpg"
-            alt=""
-          />
-        </van-grid-item>
-        <van-grid-item>
-          <img
-            src="../assets/search/61250d46-6eb9-4846-99ce-6d65778a84a2.jpg"
-            alt=""
-          />
-        </van-grid-item>
-      </van-grid>
-    </div>
+    <!-- 底部标签栏 -->
+    <bottom></bottom>
+
   </div>
 </template>
 <script>
 import navbar from "../components/Navbar.vue";
+import bottom from "../components/Buttom.vue"
 export default {
-  components: { navbar },
+  components: { navbar,bottom },
   props: ["value"],
   data() {
     return {
@@ -72,14 +47,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.pic-cell{
-    margin: 4vh;
-    // padding-top: 3vh;
-    // background-color: rgb(245,245,245);
-    img{
-        width: 100%;
-    }
-}
+
 .search-serp {
   font-weight: 500;
   color: #333;

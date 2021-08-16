@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       value: "",
+      arr:[]
     };
   },
   methods: {
@@ -33,8 +34,23 @@ export default {
     onSearch() {
       console.log(this.value);
       this.$router.push(`/serp/${this.value}`);
+      var keys = sessionStorage.getItem('key')
+      if(keys){
+        keys = JSON.parse(keys)
+        keys.push(this.value)
+      }else{
+        keys = [this.value]
+      }
+  console.log(keys)
+      sessionStorage.setItem('key',JSON.stringify(keys))
     },
 
+  },
+  mounted () {
+    // sessionStorage.setItem('q','qweqwe')
+    console.log(sessionStorage.getItem('key'))
+    this.arr =JSON.parse(sessionStorage.getItem('key'))
+    console.log(this.arr)
   },
 };
 </script>

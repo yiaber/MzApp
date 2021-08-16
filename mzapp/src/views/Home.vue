@@ -1,6 +1,23 @@
 <template>
   <div>
     <navbar></navbar>
+    <van-tabs
+      color="#008cff"
+      line-width="30px"
+      line-height="2px"
+      title-active-color="#008cff"
+      title-inactive-color="#333"
+      v-model="active"
+    >
+      <!-- 首页推荐页面 -->
+      <van-tab title="推荐" style="margin-top: 10px" v-if="index_swipe">
+        <!-- 轮播图 -->
+       
+      </van-tab>
+
+      <van-tab v-for="(item, index) in laptop" :key="index" :title="item.fname">
+      </van-tab>
+    </van-tabs>
     <!-- 顶部导航栏 -->
     <!-- <van-nav-bar class="navbar">
       <template #left>
@@ -34,158 +51,18 @@
       </template>
     </van-nav-bar> -->
     <!-- 导航标签页 -->
-    <van-tabs
-      color="#008cff"
-      line-width="30px"
-      line-height="2px"
-      title-active-color="#008cff"
-      title-inactive-color="#333"
-    >
-      <!-- 首页推荐页面 -->
-      <van-tab title="推荐" style="margin-top: 10px" v-if="index_swipe">
-        <!-- 轮播图 -->
-        <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-          <van-swipe-item v-for="(item, index) in index_swipe" :key="index">
-            <img class="index_swipe" :src="urls + item.image" alt="" />
-          </van-swipe-item>
-        </van-swipe>
-        <!-- 轮播图下面三个小图标 -->
-        <van-row class="title_imgs" type="flex" justify="space-around">
-          <van-col span="7"
-            ><img
-              src="../assets/index/99f49dfe-25c2-485a-b7b3-8b63d6487b46.png"
-              alt=""
-            /><span>魅族官方提供</span></van-col
-          >
-          <van-col span="6"
-            ><img
-              src="../assets/index/8f1252b1-3fb2-48e2-b992-1f38a9745314.png"
-              alt=""
-            /><span>满80免运费</span>
-          </van-col>
-          <van-col span="7"
-            ><img
-              src="../assets/index/3924a1e1-5b4a-41de-9e79-ee904ec69d90.png"
-              alt=""
-            /><span>7天无理由退货</span>
-          </van-col>
-        </van-row>
-        <!-- 轮播图下面四个商品信息 -->
-        <div class="fore-cell">
-          <van-grid
-            :clickable="true"
-            :border="false"
-            :column-num="4"
-            class="fore-cell-ll"
-          >
-            <van-grid-item>
-              <img src="../assets/index/11.jpg" alt="" />
-              <span>清新暑期</span>
-            </van-grid-item>
-            <van-grid-item>
-              <img src="../assets/index/22.png" />
-              <span>魅族 18</span>
-            </van-grid-item>
-            <van-grid-item>
-              <img src="../assets/index/33.png" />
-              <span>18 Pro</span>
-            </van-grid-item>
-            <van-grid-item>
-              <img src="../assets/index/44.jpg" />
-              <span>以旧换新</span>
-            </van-grid-item>
-          </van-grid>
-        </div>
-        <!-- 首屏推荐 -->
-        <van-row type="flex" class="index-banner">
-          <van-col span="12"
-            ><img src="../assets/index/18Pro.jpg" alt=""
-          /></van-col>
-          <van-col span="12">
-            <img src="../assets/index/18.jpg" alt="" />
-            <img src="../assets/index/watch.jpg" alt="" />
-          </van-col>
-        </van-row>
-        <!-- 智能手机 -->
-        <van-tabs class="h3-cell" color="#008cff">
-          <van-tab>
-            <template #title> <h3 style="color: #000">智能手机</h3></template>
-          </van-tab>
-        </van-tabs>
-        <van-image
-          style="display: block"
-          width="100%"
-          :src="require('../assets/index/phone.jpg')"
-        />
-        <van-grid :column-num="2" clickable :gutter="5" class="phone-cell-img">
-          <van-grid-item
-            v-for="(item, index) in phone.slice(0, 6)"
-            :key="index"
-          >
-            <img :src="urls + item.title_img" alt="" />
-            <h4>{{ item.name }} {{ item.color }}</h4>
-            <div>{{ item.price_title }}{{ item.title }}</div>
-            <p>￥{{ item.price }}</p>
-          </van-grid-item>
-        </van-grid>
-        <!-- 手机配件 -->
-        <div v-if="accessories">
-          <van-tabs class="h3-cell" color="#7143FF">
-            <van-tab>
-              <template #title> <h3 style="color: #000">智能配件</h3></template>
-            </van-tab>
-          </van-tabs>
-          <div class="accessories-cell">
-            <div>
-              <img :src="urls + accessories[9].title_img" alt="" />
-            </div>
-            <div>
-              <h4>{{ accessories[9].name }}</h4>
-              <span>{{ accessories[9].title }}</span>
-              <p>￥{{ accessories[9].price }}</p>
-            </div>
-          </div>
-          <div class="accessories-cell-r">
-            <div>
-              <h4>{{ accessories[10].name }}</h4>
-              <span>{{ accessories[10].title }}</span>
-              <p>￥{{ accessories[10].price }}</p>
-            </div>
-            <div>
-              <img :src="urls + accessories[10].title_img" alt="" />
-            </div>
-          </div>
-          <van-grid
-            :column-num="2"
-            clickable
-            :gutter="5"
-            class="phone-cell-img"
-          >
-            <van-grid-item
-              v-for="(item, index) in accessories.slice(0, 6)"
-              :key="index"
-            >
-              <img :src="urls + item.title_img" alt="" />
-              <h4>{{ item.name }}</h4>
-              <div>{{ item.price_title }}{{ item.title }}</div>
-              <p>￥{{ item.price }}</p>
-            </van-grid-item>
-          </van-grid>
-        </div>
-        <!--  -->
-      </van-tab>
-
-      <van-tab v-for="(item, index) in laptop" :key="index" :title="item.fname">
-      </van-tab>
-    </van-tabs>
+    <slot />
+    <buttom></buttom>
   </div>
 </template>
 <script>
 import navbar from "../components/Navbar.vue";
+import buttom from "../components/Buttom.vue";
 export default {
-  components: { navbar },
+  components: { navbar, buttom },
   data() {
     return {
+      active: 0,
       laptop: "", // 商品分类
       index_swipe: "", //首页轮播图
       phone: "", // 所有手机
@@ -217,13 +94,41 @@ export default {
     this.axios.get("/accessories").then((result) => {
       // console.log(result);
       this.accessories = result.data.res;
-      console.log(this.accessories);
+      // console.log(this.accessories);
     });
+
+    
+    switch (this.$route.path) {
+      case '/':
+        this.active = 0
+        return
+      case '/phone':
+        this.active = 1
+        return
+      case '/accessories':
+        this.active = 4
+    }
+  },
+  watch: {
+    active(newVal, oldVal) {
+      switch (newVal) {
+        case 0:
+          this.$router.push("/");
+          break;
+        case 1:
+          this.$router.push("/phone");
+          break
+        case 4:
+          this.$router.push("/accessories")
+          return
+      }
+    },
+    
   },
 };
 </script>
 
-<style scoped lang="scss" >
+<style scoped lang="scss">
 .accessories-cell-r {
   display: flex;
   // height: 50vh;
