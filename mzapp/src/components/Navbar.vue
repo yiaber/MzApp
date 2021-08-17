@@ -50,7 +50,7 @@
       </div>
       <!-- 个人基本功能 -->
       <van-grid class="grid-cell" clickable :border="false" :column="4">
-        <van-grid-item>
+        <van-grid-item to="/me">
           <img src="../assets/index/15569c6b-5e3f-41da-8dbf-edfd557191fb.png" alt="">
           <span>个人中心</span>
         </van-grid-item>

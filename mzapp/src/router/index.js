@@ -7,25 +7,45 @@ import Buttom from "../components/Buttom.vue";
 import Phone from "../components/Phone.vue";
 import Index from "../components/Index.vue";
 import Accessories from "../components/Accessories.vue";
+import Me from "../components/Me.vue";
+import Login from "../views/Login.vue";
+import Logins from "../views/Logins.vue";
+import Register from "../views/Register.vue"
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path:"/accessories",
-    component:Accessories
+    path: "/register",
+    component: Register,
   },
   {
-    path:"/phone",
-    component:Phone
+    path: "/logins",
+    component: Logins,
   },
   {
-    path:"/",
-    component:Index
+    path: "/login",
+    component: Login,
   },
   {
-    path:"/buttom",
-    component:Buttom
+    path: "/me",
+    component: Me,
+  },
+  {
+    path: "/accessories",
+    component: Accessories,
+  },
+  {
+    path: "/phone",
+    component: Phone,
+  },
+  {
+    path: "/",
+    component: Index,
+  },
+  {
+    path: "/buttom",
+    component: Buttom,
   },
   {
     path: "/serp/:value",
