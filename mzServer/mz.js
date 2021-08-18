@@ -26,6 +26,44 @@ app.use(
 );
 app.use(express.static("./public"));
 
+/**用户注册  */
+app.post("/registar", (req, res) => {
+  let phone = req.body.phone;
+  let pwd = req.body.upwd;
+  // 以name为条件查询数据库。保证数据的唯一性
+  let sql = "select count(phone)AS count from mz_user where phone=?";
+  pool.query(sql, [phone], (errer, result) => {
+    if (errer) throw errer;
+    let count = result[0].count;
+    if (count == 0) {
+      // 将用户的信息插入到数据表
+      sql = "insert mz_user(phone,pwd) values(?,?)";
+      pool.query(sql, [phone, pwd], (errer, result) => {
+        if (errer) throw errer;
+        res.send({ msg: "ok", code: 200 });
+      });
+    } else {
+      res.send({ mgs: "user exists", code: 201 });
+    }
+  });
+});
+
+/** 用户登录 */
+app.post("/login", (req, res) => {
+  //获取用户输入的信息
+  let phone = req.body.phone;
+  let pwd = req.body.upwd;
+  let sql = "select phone,pwd from mz_user where phone=? AND pwd=?";
+  pool.query(sql, [phone, pwd], (errer, result) => {
+    if (errer) throw errer;
+    if (result.length == 0) {
+      res.send({ msg: "账户密码正确，登录成功", code: 201 });
+    } else {
+      res.send({ msg: "账户密码正确，登录成功", code: 200, result: result[0] });
+    }
+  });
+});
+
 //查询所有类别
 app.get("/laptop_family", (req, res) => {
   let sql = "select*from mz_laptop_family";

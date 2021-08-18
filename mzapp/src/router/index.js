@@ -10,7 +10,7 @@ import Accessories from "../components/Accessories.vue";
 import Me from "../components/Me.vue";
 import Login from "../views/Login.vue";
 import Logins from "../views/Logins.vue";
-import Register from "../views/Register.vue"
+import Register from "../views/Register.vue";
 
 Vue.use(VueRouter);
 
@@ -78,5 +78,9 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+const routerRePush = VueRouter.prototype.push;
+VueRouter.prototype.push = function(location) {
+  return routerRePush.call(this, location).catch((error) => error);
+};
 
 export default router;

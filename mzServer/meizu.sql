@@ -3,6 +3,17 @@ DROP DATABASE IF EXISTS mz;
 CREATE DATABASE mz CHARSET=UTF8;
 USE mz;
 
+/**用户信息**/
+CREATE TABLE mz_user(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(32),
+    pwd VARCHAR(32),
+    phone VARCHAR(16),
+    gender boolean,
+    avatar VARCHAR(128)
+);
+
+
 /**总产品分类**/
 CREATE TABLE mz_laptop_family(
     fid INT PRIMARY KEY AUTO_INCREMENT,  #编号
@@ -62,7 +73,12 @@ CREATE TABLE mz_accessories(
     pic VARCHAR(128),
     leibie INT,
     FOREIGN KEY(leibie) REFERENCES mz_laptop_family(fid)
-);                            
+);    
+
+/* 插入用户信息 */
+INSERT INTO mz_user VALUES(NULL,'zhangsan','123456','13888888888',1,NULL);
+
+
 /* 插入产品分类 */
 INSERT INTO mz_laptop_family VALUES(NULL,"手机");
 INSERT INTO mz_laptop_family VALUES(NULL,"Lipro");

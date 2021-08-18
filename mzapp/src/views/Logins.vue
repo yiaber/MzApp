@@ -19,8 +19,10 @@
         <input type="text" class="phone-cell" placeholder="手机号码" />
       </div>
       <!-- 注册和登录 -->
-      <van-button type="info" size="large " style="margin-top: 50px;">登录</van-button>
-      <div class="register"><span>注册</span></div>
+      <van-button type="info" size="large " style="margin-top: 50px;"
+        >登录</van-button
+      >
+      <div class="register"  @click="register"><span>注册</span></div>
     </div>
   </div>
 </template>
@@ -33,6 +35,10 @@ export default {
     };
   },
   methods: {
+    register() {
+      //注册事件
+      this.$router.push("/register")
+    },
     close() {
       console.log(123);
     },
@@ -45,8 +51,8 @@ export default {
 
 <style lang="scss" scoped>
 .register {
-    color: #515151;
-    margin-top: 5vw;
+  color: #515151;
+  margin-top: 5vw;
   text-align: center;
 }
 .input-box {
