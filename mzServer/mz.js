@@ -27,7 +27,7 @@ app.use(
 app.use(express.static("./public"));
 
 /**用户注册  */
-app.post("/registar", (req, res) => {
+app.post("/register", (req, res) => {
   let phone = req.body.phone;
   let pwd = req.body.upwd;
   // 以name为条件查询数据库。保证数据的唯一性

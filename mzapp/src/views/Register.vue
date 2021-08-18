@@ -7,8 +7,8 @@
     <!-- 顶部错误提示 -->
     <div class="tip-box" :style="{ visibility: closee }">
       <van-icon class="err-ico" name="warning" color="red" />
-      <span class="tip-font">账号或者密码不正确!</span>
-      <van-icon @click="closee" class="close-ico" name="cross" color="red" />
+      <span class="tip-font">手机号码格式不正确!</span>
+      <van-icon @click="btns" class="close-ico" name="cross" color="red" />
     </div>
     <!-- 手机号码 -->
     <div class="input-box">
@@ -32,8 +32,9 @@
     <div class="rememberField">
       <van-checkbox
         class="kuang"
-        style=" display: inline-block;"
+        style="display: inline-block"
         v-model="checked"
+        @click="!checked"
         shape="square"
       >
       </van-checkbox>
@@ -51,10 +52,13 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { Toast } from "vant";
+Vue.use(Toast);
 export default {
   data() {
     return {
-      closee: "",
+      closee: "hidden",
       checked: false, //确认条款
       phone: "", //手机号码
       upwd: "", //密码
@@ -66,14 +70,47 @@ export default {
       let reg = /^\d{11}$/;
       if (reg.test(this.phone)) {
         this.closee = "hidden";
+        return true;
       } else {
         this.closee = "visible";
-        console.log(123);
+        // console.log(123);
       }
-      console.log(reg.test(this.phone));
+      // console.log(reg.test(this.phone));
     },
-    checkFrom() {},
-
+    //点击关闭提示框
+    btns() {
+      this.closee = "hidden";
+    },
+    // 点击注册
+    checkFrom() {
+      if (this.checked) {
+        if (this.checkPhone()) {
+          this.axios
+            .post("/registar", `phone=${this.phone}&upwd=${this.upwd}`)
+            .then((result) => {
+              console.log(result);
+              if (result.data.code == 200) {
+                Toast.success({
+                  message: "注册成功",
+                  position: "top",
+                });
+              } else if (result.data.code == 201) {
+                Toast.fail({
+                  message: "注册失败，该手机号码已经被注册",
+                  position: "top",
+                });
+              }
+            });
+        }
+      }else{
+        Toast({
+  message: '请先同意用户条款',
+  position: 'top',
+});
+      }
+      
+    },
+    // 跳转登录页面
     register() {
       this.$router.push("/login");
     },
