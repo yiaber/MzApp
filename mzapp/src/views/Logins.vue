@@ -23,18 +23,22 @@
         >登录</van-button
       >
       <div class="register"  @click="register"><span>注册</span></div>
+      <input type="text" v-model="phone" >
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   data() {
     return {
       closee: "hidden",
+      phone:'',
     };
   },
   methods: {
+    ...mapMutations(["setPhone"]),
     register() {
       //注册事件
       this.$router.push("/register")
@@ -46,6 +50,9 @@ export default {
       this.$router.push("./login");
     },
   },
+  computed:{
+    ...mapState(["uname"])
+  }
 };
 </script>
 

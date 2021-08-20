@@ -57,9 +57,9 @@ app.post("/login", (req, res) => {
   pool.query(sql, [phone, pwd], (errer, result) => {
     if (errer) throw errer;
     if (result.length == 0) {
-      res.send({ msg: "账户密码正确，登录成功", code: 201 });
+      res.send({ msg: "账号或者密码不正确!", code: 201 });
     } else {
-      res.send({ msg: "账户密码正确，登录成功", code: 200, result: result[0] });
+      res.send({ msg: "登录成功", code: 200 });
     }
   });
 });

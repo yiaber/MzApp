@@ -149,20 +149,24 @@ export default {
       urls: "http://127.0.0.1:3000/",
     };
   },
-  methods: {},
-  mounted() {
-    // 请求导航标签栏接口
-    this.axios.get("/laptop_family").then((result) => {
-      // console.log(result);
-      this.laptop = result.data.res;
-      // console.log(this.laptop);
-    });
-    // 请求首页轮播图接口
+  methods: {
+    getData(){
+          // 请求首页轮播图接口
     this.axios.get("/index_swipe").then((result) => {
       // console.log(result);
       this.index_swipe = result.data.res;
       // console.log(this.index_swipe);
     });
+    }
+  },
+  mounted() {
+    // // 请求导航标签栏接口
+    // this.axios.get("/laptop_family").then((result) => {
+    //   // console.log(result);
+    //   this.laptop = result.data.res;
+    //   // console.log(this.laptop);
+    // });
+    this.getData()
     //  请求所有手机商品
     this.axios.get("/phone").then((result) => {
       // console.log(result);

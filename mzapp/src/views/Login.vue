@@ -8,14 +8,19 @@
     <div class="main-form">
       <div class="tip-box" :style="{ visibility: closee }">
         <van-icon class="err-ico" name="warning" color="red" />
-        <span class="tip-font">账号或者密码不正确!</span>
-        <van-icon @click="closee" class="close-ico" name="cross" color="red" />
+        <span class="tip-font">手机号码格式不正确!</span>
+        <van-icon @click="btns" class="close-ico" name="cross" color="red" />
       </div>
       <div class="main-form-info">
-        <input type="text" placeholder="手机号码/Flyme账号" />
+        <input
+          v-model="phone"
+          type="text"
+          @blur="checkPhone"
+          placeholder="手机号码/Flyme账号"
+        />
       </div>
       <div class="main-form-info">
-        <input type="password" placeholder="密码" />
+        <input v-model="upwd" type="password" placeholder="密码" />
       </div>
       <div class="rememberField">
         <van-checkbox class="rememberFieldl" v-model="checked" shape="square"
@@ -24,27 +29,70 @@
         <span>忘记密码?</span>
       </div>
       <!-- 注册和登录 -->
-      <van-button type="info" size="large ">登录</van-button>
+      <van-button @click="checkFrom" type="info" size="large ">登录</van-button>
       <div class="register" @click="register"><span>注册</span></div>
+      
     </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import { Toast } from "vant";
+Vue.use(Toast);
 export default {
   data() {
     return {
       closee: "hidden",
       checked: false,
+      phone: "", //手机号码
+      upwd: "", // 密码
     };
   },
   methods: {
-    register() {
-      //注册事件
-      this.$router.push("/register")
+    // 验证手机号码格式
+    checkPhone() {
+      let reg = /^\d{11}$/;
+      if (reg.test(this.phone)) {
+        this.closee = "hidden";
+        return true;
+      } else {
+        this.closee = "visible";
+      }
     },
-    close() {
-      console.log(123);
+    // 点击登录
+    checkFrom() {
+      if (this.checkPhone()) {
+        this.axios
+          .post("/login", `phone=${this.phone}&upwd=${this.upwd}`)
+          .then((result) => {
+            console.log(result);
+            if (result.data.code == 200) {
+              Toast.success({
+                message: `${result.data.msg}`,
+                position: "top",
+              });
+              setTimeout( () =>{
+                this.$router.push("/me");
+              }, 1000);
+            } else if (result.data.code == 201) {
+              Toast.fail({
+                message: `${result.data.msg}`,
+                position: "top",
+              });
+            }
+          });
+      } else {
+        Toast("请先确认手机号码格式");
+      }
+    },
+    // 点击关闭提示框
+    btns() {
+      this.closee = "hidden";
+    },
+    // 点击跳转到注册页面
+    register() {
+      this.$router.push("/register");
     },
     yanzhengma() {
       this.$router.push("/logins");
