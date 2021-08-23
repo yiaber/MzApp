@@ -86,7 +86,7 @@ export default {
       if (this.checked) {
         if (this.checkPhone()) {
           this.axios
-            .post("/registar", `phone=${this.phone}&upwd=${this.upwd}`)
+            .post("/register", `phone=${this.phone}&upwd=${this.upwd}`)
             .then((result) => {
               console.log(result);
               if (result.data.code == 200) {
