@@ -86,14 +86,19 @@ export default {
       if (this.checked) {
         if (this.checkPhone()) {
           this.axios
-            .post("/registar", `phone=${this.phone}&upwd=${this.upwd}`)
+            .post("/register", `phone=${this.phone}&upwd=${this.upwd}`)
             .then((result) => {
-              console.log(result);
+              // console.log(result);
               if (result.data.code == 200) {
                 Toast.success({
-                  message: "注册成功",
+                  message: "注册成功注册成功2秒后跳转到登录页面",
                   position: "top",
                 });
+                // 注册成功2秒后跳转到登录页面
+                setTimeout(() => {
+                  console.log(123);
+                  this.$router.push("/login");
+                }, 2000);
               } else if (result.data.code == 201) {
                 Toast.fail({
                   message: "注册失败，该手机号码已经被注册",
@@ -102,13 +107,12 @@ export default {
               }
             });
         }
-      }else{
+      } else {
         Toast({
-  message: '请先同意用户条款',
-  position: 'top',
-});
+          message: "请先同意用户条款",
+          position: "top",
+        });
       }
-      
     },
     // 跳转登录页面
     register() {

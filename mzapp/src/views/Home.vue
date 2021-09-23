@@ -12,14 +12,13 @@
       <!-- 首页推荐页面 -->
       <van-tab title="推荐" style="margin-top: 10px" v-if="index_swipe">
         <!-- 轮播图 -->
-       
       </van-tab>
 
       <van-tab v-for="(item, index) in laptop" :key="index" :title="item.fname">
       </van-tab>
     </van-tabs>
     <!-- 顶部导航栏 -->
-    <!-- <van-nav-bar class="navbar">
+    <van-nav-bar class="navbar">
       <template #left>
         <van-icon name="search" color="#aaa" size="25" @click="onClickLeft()" />
       </template>
@@ -47,9 +46,8 @@
           height="15.05rpx"
           alt=""
         />
-       
       </template>
-    </van-nav-bar> -->
+    </van-nav-bar>
     <!-- 导航标签页 -->
     <slot />
     <buttom></buttom>
@@ -97,16 +95,15 @@ export default {
       // console.log(this.accessories);
     });
 
-    
     switch (this.$route.path) {
-      case '/':
-        this.active = 0
-        return
-      case '/phone':
-        this.active = 1
-        return
-      case '/accessories':
-        this.active = 4
+      case "/":
+        this.active = 0;
+        return;
+      case "/phone":
+        this.active = 1;
+        return;
+      case "/accessories":
+        this.active = 4;
     }
   },
   watch: {
@@ -117,13 +114,12 @@ export default {
           break;
         case 1:
           this.$router.push("/phone");
-          break
+          break;
         case 4:
-          this.$router.push("/accessories")
-          return
+          this.$router.push("/accessories");
+          return;
       }
     },
-    
   },
 };
 </script>
