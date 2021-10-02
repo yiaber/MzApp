@@ -18,7 +18,7 @@
       </van-tab>
     </van-tabs>
     <!-- 顶部导航栏 -->
-    <van-nav-bar class="navbar">
+    <!-- <van-nav-bar class="navbar">
       <template #left>
         <van-icon name="search" color="#aaa" size="25" @click="onClickLeft()" />
       </template>
@@ -47,7 +47,7 @@
           alt=""
         />
       </template>
-    </van-nav-bar>
+    </van-nav-bar> -->
     <!-- 导航标签页 -->
     <slot />
     <buttom></buttom>
